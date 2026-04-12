@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=MedievalSharp&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+:root {
+  --black: #181818;
+  --light-black:#2e2e2e;
+  --white: #eeeeee;
+  --red: #bb0202;
+  --darkRed: #180000;
+}
+
+.impressum-container{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.impressum-container li{
+    font-size: 30px;
+}
