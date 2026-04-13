@@ -1,2 +1,43 @@
-Hallooo Hildegard hier.
-Rest folgt morgen
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Hildegards Alchemie-Labor</title>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Metamorphous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="pergament">
+        <h1>Hildegards Alchemie-Labor</h1>
+        <p>„Die Natur ist die beste Apotheke.“ – Hildegard von Bingen</p>
+        
+        <div id="spielfeld">
+            </div>
+
+        <div id="inventar">
+            <div class="item" draggable="true" data-type="Erde">
+                <div class="item-icon">🌱</div> 
+                <div class="item-name">Erde</div>
+            </div>
+            <div class="item" draggable="true" data-type="Wasser">
+                <div class="item-icon">💧</div>
+                <div class="item-name">Wasser</div>
+            </div>
+            <div class="item" draggable="true" data-type="Feuer">
+                <div class="item-icon">🔥</div>
+                <div class="item-name">Feuer</div>
+            </div>
+            <div class="item" draggable="true" data-type="Luft">
+                <div class="item-icon">🌬️</div> <div class="item-name">Luft</div>
+            </div>
+            <div class="item" draggable="true" data-type="Sonne">
+                <div class="item-icon">☀️</div>
+                <div class="item-name">Sonne</div>
+            </div>
+        </div>
+        
+        <div id="log">Beginne dein Werk...</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
