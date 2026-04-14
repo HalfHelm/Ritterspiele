@@ -1,118 +1,96 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-  <meta charset="utf-8">
-  <title>Unity Web Player | Ritterspiele-Dress Up</title>
-  <link rel="stylesheet" href="TemplateData/style.css">
+<meta charset="utf-8">
+<title>Unity Web Player</title>
 
-  <style>
-    body {
-      margin: 0;
-      background: #d9d9d9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+<style>
+body {
+  margin: 0;
+  background: #d9d9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-    /* 🔥 Container kleiner, aber korrektes Seitenverhältnis */
-    #unity-container {
-      width: min(90vw, 960px);
-      aspect-ratio: 16 / 9;
-      background: black;
-      position: relative;
-    }
+/* Container (klein) */
+#unity-container {
+  width: 960px;
+  height: 540px;
+  position: relative;
+  background: black;
+  overflow: hidden;
+}
 
-    #unity-canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    #unity-loading-bar {
-      position: absolute;
-      width: 100%;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  </style>
+/* Canvas wird NICHT gestretcht */
+#unity-canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
 </head>
 
 <body>
 
-  <div id="unity-container">
-    <canvas id="unity-canvas"></canvas>
+<div id="unity-container">
+  <canvas id="unity-canvas"></canvas>
+</div>
 
-    <div id="unity-loading-bar">
-      <div id="unity-progress-bar-empty">
-        <div id="unity-progress-bar-full"></div>
-      </div>
-    </div>
-  </div>
+<script>
+var canvas = document.querySelector("#unity-canvas");
 
-  <script>
-    var canvas = document.querySelector("#unity-canvas");
+var buildUrl = "Build";
+var loaderUrl = buildUrl + "/Pagen-Simulator.loader.js";
 
-    function unityShowBanner(msg, type) {
-      console.log(msg);
-    }
+var config = {
+  dataUrl: buildUrl + "/Pagen-Simulator.data",
+  frameworkUrl: buildUrl + "/Pagen-Simulator.framework.js",
+  codeUrl: buildUrl + "/Pagen-Simulator.wasm",
 
-    var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/Pagen-Simulator.loader.js";
+  /* ❗ WICHTIG: Unity NICHT an Canvas koppeln */
+  matchWebGLToCanvasSize: false
+};
 
-    var config = {
-      dataUrl: buildUrl + "/Pagen-Simulator.data",
-      frameworkUrl: buildUrl + "/Pagen-Simulator.framework.js",
-      codeUrl: buildUrl + "/Pagen-Simulator.wasm",
-      streamingAssetsUrl: "StreamingAssets",
-      companyName: "DefaultCompany",
-      productName: "Ritterspiele-Dress Up",
-      productVersion: "1.0",
-      showBanner: unityShowBanner,
+/* 🔥 DAS ist der entscheidende Part */
+function fitCanvas() {
+  const container = document.getElementById("unity-container");
 
-      matchWebGLToCanvasSize: true,
-      devicePixelRatio: 1
-    };
+  const containerWidth = container.clientWidth;
+  const containerHeight = container.clientHeight;
 
-    // 🔥 DAS ist der wichtige Part
-    function resizeCanvas() {
-      const container = document.getElementById("unity-container");
+  const gameAspect = 16 / 9;
 
-      const width = container.clientWidth;
-      const height = container.clientHeight;
+  let width = containerWidth;
+  let height = width / gameAspect;
 
-      // visuelle Größe
-      canvas.style.width = width + "px";
-      canvas.style.height = height + "px";
+  if (height > containerHeight) {
+    height = containerHeight;
+    width = height * gameAspect;
+  }
 
-      // interne Unity-Auflösung bleibt Full HD
-      canvas.width = 1920;
-      canvas.height = 1080;
-    }
+  canvas.style.width = width + "px";
+  canvas.style.height = height + "px";
 
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
+  /* interne Auflösung = dein Unity Spiel */
+  canvas.width = 1920;
+  canvas.height = 1080;
+}
 
-    document.querySelector("#unity-loading-bar").style.display = "block";
+window.addEventListener("resize", fitCanvas);
+fitCanvas();
 
-    var script = document.createElement("script");
-    script.src = loaderUrl;
+var script = document.createElement("script");
+script.src = loaderUrl;
 
-    script.onload = () => {
-      createUnityInstance(canvas, config, (progress) => {
-        document.querySelector("#unity-progress-bar-full").style.width =
-          100 * progress + "%";
-      })
-      .then((unityInstance) => {
-        document.querySelector("#unity-loading-bar").style.display = "none";
-      })
-      .catch((message) => {
-        alert(message);
-      });
-    };
+script.onload = () => {
+  createUnityInstance(canvas, config);
+};
 
-    document.body.appendChild(script);
-  </script>
+document.body.appendChild(script);
+</script>
 
 </body>
 </html>
