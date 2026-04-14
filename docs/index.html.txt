@@ -1,4 +1,0 @@
-<h1>Meine Spiele 🎮</h1>
-
-<a href="./Pagen-Simulator">Game 1 starten</a>
-<a href="./game2/">Game 2 starten</a>
