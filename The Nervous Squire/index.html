@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nervous Squire - Karriere-Modus</title>
+    <style>
+        body {
+            background-color: #1c1c12;
+            color: #e8dfc6;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .game-container {
+            border: 4px solid #c5a059;
+            background-color: #2a2a1d;
+            padding: 30px;
+            max-width: 650px;
+            margin: 0 auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+        }
+        h1 {
+            color: #d4af37;
+            font-size: 36px;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px #000;
+        }
+        .rank-badge {
+            background-color: #c5a059;
+            color: #1c1c12;
+            padding: 5px 15px;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .knight-panel {
+            background-color: #1a1a10;
+            border: 2px dashed #c5a059;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 200px;
+        }
+        .knight-name {
+            color: #d4af37;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .knight-avatar {
+            font-size: 70px;
+            margin-top: 10px;
+            display: inline-block;
+            transition: transform 0.1s;
+        }
+        .shake {
+            animation: shakeAnim 0.15s infinite;
+        }
+        @keyframes shakeAnim {
+            0% { transform: translate(2px, 1px) rotate(0deg); }
+            100% { transform: translate(-2px, -1px) rotate(1deg); }
+        }
+        .knight-bubble {
+            background: #fff8e7;
+            color: #2a1a08;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 20px;
+            max-width: 85%;
+            margin: 0 auto 15px auto;
+            box-shadow: 3px 3px 0px #000;
+            border: 2px solid #5c4d3c;
+        }
+        .btn-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #5c4d3c;
+            color: #e8dfc6;
+            border: 2px solid #c5a059;
+            padding: 15px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        button:hover:not(:disabled) {
+            background-color: #7c6d5c;
+            color: #fff;
+            box-shadow: 0 0 8px #c5a059;
+        }
+        button:disabled {
+            background-color: #333;
+            color: #666;
+            border-color: #555;
+            cursor: not-allowed;
+        }
+        #timer-bar {
+            width: 100%;
+            background-color: #444;
+            height: 18px;
+            border-radius: 9px;
+            overflow: hidden;
+            border: 1px solid #000;
+        }
+        #timer-fill {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #d4af37, #ff4444);
+        }
+        .big-illustration {
+            font-size: 80px;
+            margin: 25px 0;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>THE NERVOUS SQUIRE</h1>
+    <div id="rank-display" class="rank-badge">Knappe im ersten Lehrjahr</div>
+    <hr style="border-color: #5c4d3c;">
+
+    <div id="start-screen">
+        <p style="font-size: 18px; line-height: 1.6;">
+            Seid gegrüßt, ungeschickter Knecht! Arbeitet Euch im Dienste des Adels nach oben. 
+            Reicht Euren Lehnsherren stets die korrekte Ausrüstung, bevor deren herrschaftliche Geduld reißt!
+        </p>
+        <div class="big-illustration">⚔️🛡️💼</div>
+        <button onclick="startGame()">Die Ausbildung beginnen</button>
+    </div>
+
+    <div id="level-up-screen" class="hidden">
+        <h2 style="color: #d4af37; font-size: 28px;">BEFÖRDERUNG ERHALTEN! 🎉</h2>
+        <p id="level-up-text" style="font-size: 18px; line-height: 1.6; margin: 15px 0;"></p>
+        <div id="level-up-icon" class="big-illustration">💰</div>
+        <button onclick="startNextLevelAfterClick()">Dem neuen Herrscher entgegentreten</button>
+    </div>
+
+    <div id="game-screen" class="hidden">
+        <div style="display: flex; justify-content: space-between; font-weight: bold; color: #d4af37;">
+            <div>Zufriedene Herrscher: <span id="score">0</span></div>
+            <div>Aktuelles Ziel: <span id="goal-display">5</span></div>
+        </div>
+        <br>
+        <div id="timer-bar"><div id="timer-fill"></div></div>
+        
+        <div class="knight-panel">
+            <div class="knight-name" id="boss-name">Ritter Kunibert</div>
+            <div class="knight-bubble" id="knight-demand">Bereitet die Gewänder vor...</div>
+            <div class="knight-avatar" id="knight-face">🪖</div>
+        </div>
+
+        <div class="btn-container">
+            <button class="item-btn" onclick="checkChoice('SCHWERT')">⚔️ Schwert</button>
+            <button class="item-btn" onclick="checkChoice('HELM')">🪖 Helm</button>
+            <button class="item-btn" onclick="checkChoice('BRATPFANNE')">🍳 Bratpfanne</button>
+            <button class="item-btn" onclick="checkChoice('QUIETSCHE-ENTE')">🦆 Ente</button>
+            <button class="item-btn" onclick="checkChoice('ZAUBERTRANK')">🧪 Zaubertrank</button>
+            <button class="item-btn" onclick="checkChoice('KLOSTERBIER')">🍺 Klosterbier</button>
+        </div>
+    </div>
+
+    <div id="game-over-screen" class="hidden">
+        <h2 style="color: #ff4444;">VON GOTT VERLASSEN!</h2>
+        <p id="game-over-reason" style="font-style: italic; margin: 20px 0; min-height: 50px;"></p>
+        <h3>Euer finaler Score: <span id="final-score">0</span></h3>
+        <button onclick="startGame()">Die Schande tilgen (Neustart)</button>
+    </div>
+</div>
+
+<script>
+    const items = ['SCHWERT', 'HELM', 'BRATPFANNE', 'QUIETSCHE-ENTE', 'ZAUBERTRANK', 'KLOSTERBIER'];
+
+    const levels = {
+        1: {
+            name: "Ritter Kunibert der Knausrige",
+            avatar: "🪖",
+            angryAvatar: "🤬",
+            happyAvatar: "🧔",
+            bigIcon: "🛡️", // Wappen für Level 1
+            goal: 5,
+            speed: 1.2,
+            badge: "Schildknappe von Ritter Kunibert",
+            description: "Ihr dient Eurem ersten Lehnsherrn. Er ist geizig, leicht reizbar, schätzt aber ein gut geschärftes Schwert.",
+            texts: {
+                'SCHWERT': "KNECHT! HOL MEIN PRÜGEL-EISEN, ES WIRD GEKÄMPFT!",
+                'HELM': "MEINE RÜSTUNG IST OBEN OFFEN! REICH DEN HELM!",
+                'BRATPFANNE': "WIR BRAUCHEN PROVIANT, HOL DIE PFANNE HERBEI!",
+                'QUIETSCHE-ENTE': "NUR DIE ENTE BERUHIGT MEIN RASEND HERZ VOR DEM KAMPF!",
+                'ZAUBERTRANK': "MIR SCHWINDEN DIE SINNE! ZAUBERTRANK HER!",
+                'KLOSTERBIER': "HURRA, DER DURST BRENNT! EIN KALTES KLOSTERBIER!"
+            }
+        },
+        2: {
+            name: "Baron Siegbert der Schnösel",
+            avatar: "👨‍💼",
+            angryAvatar: "🥵",
+            happyAvatar: "👑",
+            bigIcon: "💰", // Wappen für Level 2
+            goal: 12,
+            speed: 1.8,
+            badge: "Hofknappe beim Baron",
+            description: "Euer Fleiß hat sich herumgesprochen! Baron Siegbert hat Euch eingekauft. Er fordert absolute Schnelligkeit und trinkt nur feinstes Gebräu.",
+            texts: {
+                'SCHWERT': "Reicht mir geschwind das feine Edelschwert, Bursche!",
+                'HELM': "Mein Prunkhelm fehlt! Macht voran, das Volk schaut zu!",
+                'BRATPFANNE': "Der Pöbel hungert, reicht mir das Kochgerät!",
+                'QUIETSCHE-ENTE': "Siegbert verlangt nach seinem fürstlichen Bade-Geflügel!",
+                'ZAUBERTRANK': "Ein magisches Elixier gegen meine blaublütige Migräne, husch husch!",
+                'KLOSTERBIER': "Der Wein taugt nichts. Bringt mir feinstes Klosterbier!"
+            }
+        },
+        3: {
+            name: "König Ottokar der Überforderte",
+            avatar: "👑",
+            angryAvatar: "🤯",
+            happyAvatar: "🤴",
+            bigIcon: "🏰", // Wappen für Level 3
+            goal: 999, 
+            speed: 2.4,
+            badge: "Königlicher Ober-Groß-Knappe",
+            description: "Ihr habt die absolute Spitze erreicht. Ihr dient Seiner Majestät im Thronsaal. Hier herrscht das nackte Chaos, bleibt standhaft!",
+            texts: {
+                'SCHWERT': "DAS REICH ZERFÄLLT, WO IST DAS KÖNIGSSCHWERT?!",
+                'HELM': "DIE KRONE DRÜCKT, GIB MIR DEN KAMPFHELM!",
+                'BRATPFANNE': "WIR SPEISEN HEUTE SCHWERE KOCHKOST, REICH DIE PFANNE!",
+                'QUIETSCHE-ENTE': "STAATSRECHTLICHER NOTFALL! ICH BRAUCHE DIE REICHS-ENTE!",
+                'ZAUBERTRANK': "VERGIFTUNGSGEFAHR! SCHNELL, DEN GEGENTRANK!",
+                'KLOSTERBIER': "MAJESTÄT BRAUCHT JETZT EIN GANZES FASS KLOSTERBIER!"
+            }
+        }
+    };
+
+    let currentLevel = 1;
+    let score = 0;
+    let currentDemand = '';
+    let timeLeft = 100;
+    let timerInterval;
+    let isPausing = false;
+
+    function startGame() {
+        score = 0;
+        currentLevel = 1;
+        isPausing = false;
+        
+        document.getElementById('score').innerText = score;
+        document.getElementById('start-screen').classList.add('hidden');
+        document.getElementById('level-up-screen').classList.add('hidden');
+        document.getElementById('game-over-screen').classList.add('hidden');
+        document.getElementById('game-screen').classList.remove('hidden');
+        
+        // Level 1 Werte zurücksetzen
+        levels[1].speed = 1.2;
+        levels[2].speed = 1.8;
+        levels[3].speed = 2.4;
+
+        updateLevelUI();
+        nextTurn();
+    }
+
+    function updateLevelUI() {
+        const lvl = levels[currentLevel];
+        document.getElementById('boss-name').innerText = lvl.name;
+        document.getElementById('rank-display').innerText = lvl.badge;
+        document.getElementById('goal-display').innerText = lvl.goal === 999 ? "Endlos" : lvl.goal;
+        document.getElementById('knight-face').innerText = lvl.avatar;
+    }
+
+    function nextTurn() {
+        if (isPausing) return;
+        clearInterval(timerInterval);
+        
+        const lvl = levels[currentLevel];
+        currentDemand = items[Math.floor(Math.random() * items.length)];
+        document.getElementById('knight-demand').innerText = lvl.texts[currentDemand];
+        
+        const face = document.getElementById('knight-face');
+        face.innerText = lvl.avatar;
+        face.classList.remove('shake');
+        
+        timeLeft = 100;
+        document.getElementById('timer-fill').style.width = '100%';
+        setButtonsDisabled(false);
+        
+        timerInterval = setInterval(() => {
+            timeLeft -= lvl.speed;
+            document.getElementById('timer-fill').style.width = timeLeft + '%';
+            
+            if (timeLeft < 40) {
+                face.classList.add('shake');
+                face.innerText = lvl.angryAvatar;
+            }
+            
+            if (timeLeft <= 0) {
+                endGame(`Ihr habt zu lange gezögert! ${lvl.name} hat Euch vierteilen lassen.`);
+            }
+        }, 100);
+    }
+
+    function checkChoice(choice) {
+        if (isPausing) return;
+        const lvl = levels[currentLevel];
+        
+        if (choice === currentDemand) {
+            score++;
+            document.getElementById('score').innerText = score;
+            
+            // LEVEL UP TRIGGER
+            if (currentLevel < 3 && score >= lvl.goal) {
+                clearInterval(timerInterval);
+                isPausing = true;
+                setButtonsDisabled(true);
+                
+                // Nächstes Level vorbereiten
+                currentLevel++;
+                
+                // Zeige den Zwischenbildschirm
+                showLevelUpScreen();
+                return;
+            }
+
+            // Normaler Treffer im aktuellen Level
+            clearInterval(timerInterval);
+            isPausing = true;
+            setButtonsDisabled(true);
+            
+            document.getElementById('knight-face').classList.remove('shake');
+            document.getElementById('knight-face').innerText = lvl.happyAvatar;
+            document.getElementById('knight-demand').innerText = "Guter Knecht! Habt Dank.";
+            
+            lvl.speed += 0.08; // Erhöhe die Hektik bissi
+
+            setTimeout(() => {
+                isPausing = false;
+                nextTurn();
+            }, 600);
+            
+        } else {
+            let reason = `Ihr reichtet eine ${choice} statt einem ${currentDemand}! ${lvl.name} sperrt Euch in den tiefsten Kerker.`;
+            if (currentDemand === 'QUIETSCHE-ENTE') reason = `Niemand verweigert die Ente! ${lvl.name} jagt Euch mit den Hunden aus dem Schloss.`;
+            endGame(reason);
+        }
+    }
+
+    function showLevelUpScreen() {
+        document.getElementById('game-screen').classList.add('hidden');
+        
+        const nextLvl = levels[currentLevel];
+        document.getElementById('level-up-text').innerHTML = `Ihr habt Euren alten Dienstherrn überlebt!<br><br>Euer neuer Rang: <strong>${nextLvl.badge}</strong><br>Ihr dient ab jetzt: <strong>${nextLvl.name}</strong>.<br><br><em>${nextLvl.description}</em>`;
+        document.getElementById('level-up-icon').innerText = nextLvl.bigIcon;
+        
+        document.getElementById('level-up-screen').classList.remove('hidden');
+    }
+
+    function startNextLevelAfterClick() {
+        document.getElementById('level-up-screen').classList.add('hidden');
+        document.getElementById('game-screen').classList.remove('hidden');
+        
+        isPausing = false;
+        updateLevelUI();
+        nextTurn();
+    }
+
+    function setButtonsDisabled(disabled) {
+        const buttons = document.querySelectorAll('.item-btn');
+        buttons.forEach(btn => btn.disabled = disabled);
+    }
+
+    function endGame(reason) {
+        clearInterval(timerInterval);
+        document.getElementById('game-screen').classList.add('hidden');
+        document.getElementById('game-over-screen').classList.remove('hidden');
+        document.getElementById('game-over-reason').innerText = reason;
+        document.getElementById('final-score').innerText = score;
+    }
+</script>
+
+</body>
+</html>
