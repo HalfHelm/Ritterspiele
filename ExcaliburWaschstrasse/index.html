@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excalibur-Waschstraße</title>
+    <style>
+        body {
+            background-color: #2c1e13;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-linen.png');
+            color: #f3e5ab;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            padding: 20px;
+            user-select: none;
+            margin: 0;
+        }
+        .game-container {
+            border: 4px solid #8b7355;
+            background-color: #1a1008;
+            padding: 20px;
+            max-width: 850px;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+        }
+        h1 {
+            color: #d4af37;
+            font-size: 34px;
+            margin: 0 0 5px 0;
+            font-variant: small-caps;
+            text-shadow: 2px 2px #000;
+        }
+        .forge-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr; /* Mitte ist leicht breiter! */
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .weapon-slot {
+            background-color: #2b1f14;
+            border: 2px solid #5c4d3c;
+            border-radius: 5px;
+            height: 440px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size:24px"><text y="24">🧽</text></svg>'), pointer;
+            transition: all 0.5s ease;
+        }
+        /* Spezial-Style für das inaktive/aktive Excalibur */
+        .excalibur-locked {
+            background-color: #110b06;
+            opacity: 0.6;
+            border-color: #332211;
+        }
+        .excalibur-active {
+            box-shadow: 0 0 20px #d4af37, inset 0 0 30px rgba(212, 175, 55, 0.3);
+            border: 2px solid #d4af37;
+        }
+        .weapon-name {
+            font-weight: bold;
+            font-size: 14px;
+            color: #b5a484;
+            background-color: #1a1008;
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #5c4d3c;
+        }
+        .excalibur-active .weapon-name {
+            color: #1a1008;
+            background-color: #d4af37;
+            border-color: #fff;
+        }
+        .sword-render {
+            font-size: 130px;
+            height: 250px;
+            line-height: 250px;
+            position: relative;
+            z-index: 1;
+            filter: sepia(0.2) drop-shadow(0px 5px 5px rgba(0,0,0,0.5));
+            transition: transform 0.3s;
+        }
+        .excalibur-active .sword-render {
+            font-size: 160px; /* Excalibur wird riesig und mächtig */
+            animation: glowPulse 2s infinite alternate;
+        }
+        @keyframes glowPulse {
+            0% { filter: drop-shadow(0px 0px 5px #d4af37); }
+            100% { filter: drop-shadow(0px 0px 25px #ff4400); }
+        }
+        .dirt {
+            position: absolute;
+            font-size: 38px;
+            z-index: 2;
+            cursor: pointer;
+            animation: popIn 0.15s ease-out;
+        }
+        @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+
+        .status-container {
+            width: 100%;
+            background-color: #443322;
+            height: 12px;
+            border-radius: 2px;
+            overflow: hidden;
+            border: 1px solid #000;
+        }
+        .status-fill {
+            width: 100%;
+            height: 100%;
+            background-color: #228b22;
+            transition: width 0.1s linear;
+        }
+        button {
+            background-color: #8b7355;
+            color: #fff8e7;
+            border: 2px solid #4a3c2c;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>EXCALIBUR WASCHSTRASSE</h1>
+    <p id="game-subtitle" style="margin: 5px 0; font-size: 15px; color: #d4af37; font-weight: bold;">
+        Beweist Euer Können an den Wachen-Waffen, um Excalibur reinigen zu dürfen!
+    </p>
+    <hr style="border-color: #4a3c2c;">
+
+    <div id="start-screen">
+        <p style="line-height: 1.6; font-size: 17px; padding: 0 20px;">
+            Der König verlangt nach seiner Prunkklinge! Doch als einfacher Knappe müsst Ihr zuerst die Standard-Waffen sauberschrubben. 
+            Überlebt <strong>15 Sekunden</strong>, um das schlafende Excalibur in der Mitte freizuschalten. Ab dann herrscht das nackte Chaos!
+        </p>
+        <div style="font-size: 60px; margin: 15px;">🪓✨👑✨🗡️</div>
+        <button onclick="startGame()">An den Schleifstein treten</button>
+    </div>
+
+    <div id="game-screen" class="hidden">
+        <div style="font-size: 20px; font-weight: bold; color: #d4af37; margin-bottom: 10px;">
+            Dienstzeit im Zuber: <span id="timer-score">0</span> Sekunden
+        </div>
+
+        <div class="forge-grid">
+            <div class="weapon-slot" id="slot-0">
+                <div class="weapon-name">Wachen-Hellebarde</div>
+                <div class="sword-render">🪓</div>
+                <div class="status-container"><div class="status-fill" id="fill-0"></div></div>
+            </div>
+
+            <div class="weapon-slot excalibur-locked" id="slot-1">
+                <div class="weapon-name" id="excalibur-title">🔒 EXCALIBUR (Gesperrt)</div>
+                <div class="sword-render" id="excalibur-icon">🗡️</div>
+                <div class="status-container" id="excalibur-bar-box" style="visibility: hidden;">
+                    <div class="status-fill" id="fill-1"></div>
+                </div>
+            </div>
+
+            <div class="weapon-slot" id="slot-2">
+                <div class="weapon-name">Ritterschwert</div>
+                <div class="sword-render">⚔️</div>
+                <div class="status-container"><div class="status-fill" id="fill-2"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-over-screen" class="hidden">
+        <h2 style="color: #8b0000; font-size: 28px;">DIE WAFFENKAMMER IST RUINIERT!</h2>
+        <p id="game-over-reason" style="margin: 15px 0; font-style: italic; font-size: 16px;"></p>
+        <h3>Eure Polierzeit: <span id="final-score">0</span> Sekunden</h3>
+        <button onclick="startGame()">Einen neuen Schwamm fassen</button>
+    </div>
+</div>
+
+<script>
+    const dirtEmojis = ['💩', '🦠', '💨', '🍅', '🪰'];
+    
+    let healths = [100, 100, 100];
+    let score = 0;
+    let gameActive = false;
+    let excaliburAwake = false;
+    
+    let logicInterval;
+    let spawnInterval;
+    let scoreInterval;
+    
+    let spawnSpeed = 900; 
+
+    function startGame() {
+        healths = [100, 100, 100];
+        score = 0;
+        spawnSpeed = 900;
+        gameActive = true;
+        excaliburAwake = false;
+
+        document.getElementById('timer-score').innerText = score;
+        document.getElementById('game-subtitle').innerText = "Beweist Euer Können an den Wachen-Waffen, um Excalibur reinigen zu dürfen!";
+        
+        // Excalibur-UI zurücksetzen
+        const exSlot = document.getElementById('slot-1');
+        exSlot.className = "weapon-slot excalibur-locked";
+        document.getElementById('excalibur-title').innerText = "🔒 EXCALIBUR (Gesperrt)";
+        document.getElementById('excalibur-bar-box').style.visibility = "hidden";
+
+        document.getElementById('start-screen').classList.add('hidden');
+        document.getElementById('game-over-screen').classList.add('hidden');
+        document.getElementById('game-screen').classList.remove('hidden');
+
+        document.querySelectorAll('.dirt').forEach(e => e.remove());
+
+        startGameloops();
+    }
+
+    function startGameloops() {
+        clearInterval(logicInterval);
+        clearInterval(spawnInterval);
+        clearInterval(scoreInterval);
+
+        // 1. Sekunden-Zähler
+        scoreInterval = setInterval(() => {
+            if (!gameActive) return;
+            score++;
+            document.getElementById('timer-score').innerText = score;
+            
+            // DAS FINALE TRIGGERN BEI 15 SEKUNDEN
+            if (score === 15 && !excaliburAwake) {
+                triggerExcaliburAwakening();
+            }
+
+            // Nach dem Erwachen wird es alle 7 Sekunden noch rasanter
+            if (excaliburAwake && score % 12 === 0 && spawnSpeed > 250) {
+                spawnSpeed -= 40;
+                adjustSpawnRate();
+            }
+        }, 1000);
+
+        // 2. Verrostungs-Logik
+        logicInterval = setInterval(() => {
+            if (!gameActive) return;
+
+            // Schleife läuft über die Slots (Mitte wird erst berechnet, wenn aktiv)
+            for (let i = 0; i < 3; i++) {
+                if (i === 1 && !excaliburAwake) continue; // Überspringe Excalibur, wenn gesperrt
+
+                const slot = document.getElementById(`slot-${i}`);
+                const dirtCount = slot.querySelectorAll('.dirt').length;
+                
+                // Excalibur verrostet in der Mitte doppelt so schnell wie der Rest!
+                let multiplier = (i === 1) ? 2.5 : 1.4;
+
+                if (dirtCount > 0) {
+                    healths[i] -= dirtCount * multiplier;
+                } else {
+                    if (healths[i] < 100) healths[i] += 1.5; // Regeneration
+                }
+
+                if (healths[i] > 100) healths[i] = 100;
+                if (healths[i] < 0) healths[i] = 0;
+
+                const fill = document.getElementById(`fill-${i}`);
+                fill.style.width = healths[i] + '%';
+
+                if (healths[i] > 60) fill.style.backgroundColor = '#228b22';
+                else if (healths[i] > 30) fill.style.backgroundColor = '#d4af37';
+                else fill.style.backgroundColor = '#8b0000';
+
+                if (healths[i] <= 0) {
+                    let wName = i === 0 ? "Die Hellebarde" : i === 1 ? "Das heilige EXCALIBUR" : "Das Ritterschwert";
+                    endGame(`${wName} ist komplett verrostet! Das bricht dem König das Herz.`);
+                    return;
+                }
+            }
+        }, 100);
+
+        adjustSpawnRate();
+    }
+
+    function triggerExcaliburAwakening() {
+        excaliburAwake = true;
+        spawnSpeed = 650; // Drastischer Geschwindigkeitsschub!
+        
+        document.getElementById('game-subtitle').innerText = "⚠️ EXCALIBUR IST UNREIN! SCHRUBBEN BIS DIE FINGER BLUTEN! ⚠️";    
+
+        const exSlot = document.getElementById('slot-1');
+        exSlot.className = "weapon-slot excalibur-active";
+        document.getElementById('excalibur-title').innerText = "👑 EXCALIBUR 👑";
+        document.getElementById('excalibur-bar-box').style.visibility = "visible";
+        
+        adjustSpawnRate();
+    }
+
+    function adjustSpawnRate() {
+        clearInterval(spawnInterval);
+        spawnInterval = setInterval(() => {
+            if (!gameActive) return;
+            
+            let randomSlotId;
+            if (!excaliburAwake) {
+                // Vor Sekunde 15 spawnt Dreck nur in Slot 0 (links) oder Slot 2 (rechts)
+                randomSlotId = Math.random() < 0.5 ? 0 : 2;
+            } else {
+                // Danach überall, aber die Mitte (Excalibur) hat eine 50%-Chance, getroffen zu werden!
+                let r = Math.random();
+                if (r < 0.5) randomSlotId = 1; // Mitte
+                else if (r < 0.75) randomSlotId = 0; // Links
+                else randomSlotId = 2; // Rechts
+            }
+            
+            spawnDirtInSlot(randomSlotId);
+        }, spawnSpeed);
+    }
+
+    function spawnDirtInSlot(slotId) {
+        const slot = document.getElementById(`slot-${slotId}`);
+        const dirt = document.createElement('div');
+        dirt.className = 'dirt';
+        dirt.innerText = dirtEmojis[Math.floor(Math.random() * dirtEmojis.length)];
+
+        const x = Math.random() * 40 + 25; 
+        const y = Math.random() * 40 + 35; 
+
+        dirt.style.left = x + '%';
+        dirt.style.top = y + '%';
+
+        dirt.addEventListener('mouseover', () => {
+            dirt.remove();
+        });
+
+        slot.appendChild(dirt);
+    }
+
+    function endGame(reason) {
+        gameActive = false;
+        clearInterval(logicInterval);
+        clearInterval(spawnInterval);
+        clearInterval(scoreInterval);
+
+        document.getElementById('game-screen').classList.add('hidden');
+        document.getElementById('game-over-screen').classList.remove('hidden');
+        document.getElementById('game-over-reason').innerText = reason;
+        document.getElementById('final-score').innerText = score;
+    }
+</script>
+
+</body>
+</html>
