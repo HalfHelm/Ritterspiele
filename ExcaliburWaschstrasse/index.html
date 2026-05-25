@@ -33,7 +33,7 @@
         }
         .forge-grid {
             display: grid;
-            grid-template-columns: 1fr 1.2fr 1fr; /* Mitte ist leicht breiter! */
+            grid-template-columns: 1fr 1.2fr 1fr;
             gap: 15px;
             margin: 20px 0;
         }
@@ -52,7 +52,7 @@
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size:24px"><text y="24">🧽</text></svg>'), pointer;
             transition: all 0.5s ease;
         }
-        /* Spezial-Style für das inaktive/aktive Excalibur */
+        /* Spezialstyle für das inaktive bzw. aktive Excalibur */
         .excalibur-locked {
             background-color: #110b06;
             opacity: 0.6;
@@ -86,7 +86,7 @@
             transition: transform 0.3s;
         }
         .excalibur-active .sword-render {
-            font-size: 160px; /* Excalibur wird riesig und mächtig */
+            font-size: 160px;
             animation: glowPulse 2s infinite alternate;
         }
         @keyframes glowPulse {
@@ -227,25 +227,25 @@
         clearInterval(spawnInterval);
         clearInterval(scoreInterval);
 
-        // 1. Sekunden-Zähler
+        // Sekundenzähler
         scoreInterval = setInterval(() => {
             if (!gameActive) return;
             score++;
             document.getElementById('timer-score').innerText = score;
             
-            // DAS FINALE TRIGGERN BEI 15 SEKUNDEN
+            // Excalibur awakening
             if (score === 15 && !excaliburAwake) {
                 triggerExcaliburAwakening();
             }
 
-            // Nach dem Erwachen wird es alle 7 Sekunden noch rasanter
+            // Nach dem Erwachen wirds alle 12 Sekunden immer schneller
             if (excaliburAwake && score % 12 === 0 && spawnSpeed > 250) {
                 spawnSpeed -= 40;
                 adjustSpawnRate();
             }
         }, 1000);
 
-        // 2. Verrostungs-Logik
+        // Verrostungslogik
         logicInterval = setInterval(() => {
             if (!gameActive) return;
 
@@ -256,7 +256,7 @@
                 const slot = document.getElementById(`slot-${i}`);
                 const dirtCount = slot.querySelectorAll('.dirt').length;
                 
-                // Excalibur verrostet in der Mitte doppelt so schnell wie der Rest!
+                // Excalibur verrostet in der Mitte doppelt so schnell wie Rest
                 let multiplier = (i === 1) ? 2.5 : 1.4;
 
                 if (dirtCount > 0) {
@@ -288,7 +288,7 @@
 
     function triggerExcaliburAwakening() {
         excaliburAwake = true;
-        spawnSpeed = 650; // Drastischer Geschwindigkeitsschub!
+        spawnSpeed = 650;
         
         document.getElementById('game-subtitle').innerText = "⚠️ EXCALIBUR IST UNREIN! SCHRUBBEN BIS DIE FINGER BLUTEN! ⚠️";    
 
@@ -310,7 +310,7 @@
                 // Vor Sekunde 15 spawnt Dreck nur in Slot 0 (links) oder Slot 2 (rechts)
                 randomSlotId = Math.random() < 0.5 ? 0 : 2;
             } else {
-                // Danach überall, aber die Mitte (Excalibur) hat eine 50%-Chance, getroffen zu werden!
+                // Danach überall, aber die Mitte (Excalibur) hat 50%-Chance, getroffen zu werden
                 let r = Math.random();
                 if (r < 0.5) randomSlotId = 1; // Mitte
                 else if (r < 0.75) randomSlotId = 0; // Links
