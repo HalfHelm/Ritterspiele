@@ -1,0 +1,117 @@
+body {
+    background-color: #1a1612;
+    background-image: url('https://www.transparenttextures.com/patterns/dark-linen.png');
+    color: #f3e5ab;
+    font-family: 'Georgia', serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    user-select: none;
+}
+
+.game-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #26201a;
+    border: 4px solid #c5a059;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+h1 {
+    color: #d4af37;
+    font-size: 32px;
+    font-variant: small-caps;
+    margin: 0 0 10px 0;
+    text-shadow: 2px 2px 4px #000;
+}
+
+#score-board {
+    font-size: 20px;
+    font-weight: bold;
+    color: #c5a059;
+    margin-bottom: 15px;
+}
+
+.canvas-wrapper {
+    position: relative;
+    width: 400px;
+    height: 500px;
+    margin: 0 auto;
+    border: 3px solid #5c4d3c;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+canvas {
+    background-color: #110f0d;
+    display: block;
+}
+
+.screen-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 22, 18, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.screen-overlay h2 {
+    color: #d4af37;
+    margin-top: 0;
+}
+
+.screen-overlay p {
+    line-height: 1.6;
+    font-size: 15px;
+    color: #b5a484;
+}
+
+button {
+    background-color: #5c4d3c;
+    color: #fff8e7;
+    border: 2px solid #c5a059;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 4px 0 #36220f;
+    transition: all 0.1s;
+}
+
+button:hover {
+    background-color: #72604d;
+}
+
+button:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #36220f;
+}
+
+.danger-text {
+    color: #8b0000 !important;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.controls-hint {
+    font-size: 13px;
+    color: #726555;
+    margin-top: 15px;
+}
+
+/* Klasse zum Ausblenden der Overlays */
+.hidden {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+}

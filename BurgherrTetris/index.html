@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burgherr-Tetris - Der Turmbau</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="game-container">
+    <h1>BURGHERR TETRIS</h1>
+    <div id="score-board">Erbauchte Etagen: <span id="score">0</span></div>
+    
+    <div class="canvas-wrapper">
+        <canvas id="gameCanvas" width="400" height="500"></canvas>
+        
+        <div id="overlay" class="screen-overlay">
+            <h2>Der herrschaftliche Turmbau</h2>
+            <p>Lasst die Festungssteine mit der <strong>Leertaste</strong> fallen. Schneidet Ihr den Stein zu schmal ab, stürzt die Festung ein!</p>
+            <button id="start-btn">Das Fundament legen</button>
+        </div>
+        
+        <div id="game-over-screen" class="screen-overlay hidden">
+            <h2 class="danger-text">TURM EINGESTÜRZT!</h2>
+            <p id="death-reason"></p>
+            <p>Euer Werk maß <strong id="final-score">0</strong> Stockwerke.</p>
+            <button id="restart-btn">Einen neuen Prunk-Turm beginnen</button>
+        </div>
+    </div>
+    
+    <p class="controls-hint">Nutzt die [Leertaste] oder klickt in die Arena, um das Seil zu kappen.</p>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
