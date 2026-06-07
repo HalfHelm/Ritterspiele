@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home-style.css">
+    <link rel="stylesheet" href="kontakt.css">
+    <title>Kontakt</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <img src="../images/knight.png" alt="knight logo" class="navbar-logo">
+            <ul class="navbar-menu">
+                <li><a href="../Home/home.html">Home</a></li>
+                <li><a href="#">Spiele</a></li>
+                <li><a href="../Impressum/impressum.html">Impressum</a></li>
+                <li><a href="../Kontakt/kontakt.html">Kontakt</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-right">
+            <a href="../LoginAndSignUp/login.html" class="btn login-btn">Login</a>
+            <a href="../LoginAndSignUp/signup.html" class="btn signup-btn">Sign Up</a>
+        </div>
+    </nav>
+    
+    <div class="kontakt-container">
+        <h1>Kontakt</h1>
+        <p>Hast du Fragen, Feedback oder Probleme? Schreib uns gerne!</p>
+
+        <form class="kontakt-form">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Dein Name" required>
+
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" placeholder="Deine E-Mail" required>
+
+            <label for="message">Nachricht</label>
+            <textarea id="message" placeholder="Deine Nachricht" required></textarea>
+
+            <button type="submit" class="btn submit-btn">Absenden</button>
+        </form>
+    </div>
+</body>
+</html>

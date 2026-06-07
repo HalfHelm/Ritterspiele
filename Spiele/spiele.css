@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 30px;
+    background: #f4f4f4;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.games-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.game-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.game-card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.game-card a {
+    text-decoration: none;
+    color: #0077ff;
+    font-weight: bold;
+}

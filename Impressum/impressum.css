@@ -17,13 +17,13 @@
   --darkRed: #180000;
 }
 
-.impressum-container{
+.impressum-container {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.impressum-container li{
+.impressum-container li {
     font-size: 30px;
 }

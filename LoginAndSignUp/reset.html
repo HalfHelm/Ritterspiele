@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Passwort reset</title>
+</head>
+<body>
+
+<h2>Passwort vergessen</h2>
+
+<input type="email" id="email" placeholder="Deine Email">
+<br><br>
+<input type="password" id="password" placeholder="Neues Passwort (min. 6 Zeichen)">
+<br><br>
+
+<button onclick="resetPassword()">Passwort zurücksetzen</button>
+
+<p id="msg"></p>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../script.js"></script>
+
+<script>
+async function resetPassword() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if (!email || !password) {
+        document.getElementById("msg").innerText = "Alles ausfüllen!";
+        return;
+    }
+
+    if (password.length < 6) {
+        document.getElementById("msg").innerText = "Mindestens 6 Zeichen!";
+        return;
+    }
+
+    const { data, error } = await db
+        .from("users")
+        .update({ password: password })
+        .eq("email", email);
+
+    if (error) {
+        document.getElementById("msg").innerText = "Fehler: " + error.message;
+    } else {
+        document.getElementById("msg").innerText = "Passwort geändert!";
+    }
+}
+</script>
+
+</body>
+</html>

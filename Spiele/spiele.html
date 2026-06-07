@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiele Liste</title>
+    <link rel="stylesheet" href="spiele.css">
+    
+    <!-- WICHTIG: Das Supabase CDN einbinden -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <h1>Spiele Liste</h1>
+
+    <ul class="navbar-menu">
+        <li><a href="../Home/home.html">Home</a></li>
+        <li><a href="../Spiele/spiele.html">Spiele</a></li>
+        <li><a href="../Impressum/impressum.html">Impressum</a></li>
+        <li><a href="../Kontakt/kontakt.html">Kontakt</a></li>
+    </ul>
+
+    <input type="text" id="searchBar" placeholder="Spiel suchen...">
+    <button id="sortAZ">A → Z</button>
+    <button id="sortZA">Z → A</button>
+    <!-- 🌟 HIER IST DER NEUE BUTTON FÜR DIE LIKES -->
+    <button id="sortLikes">🔥 Beliebteste (Likes)</button>
+
+    <div class="games-container" id="gamesContainer"></div>
+
+    <script src="spiele.js"></script>
+</body>
+</html>

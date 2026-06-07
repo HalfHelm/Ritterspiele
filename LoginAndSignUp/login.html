@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="signup.css">
     <link rel="stylesheet" href="home-style.css">
+    <link rel="stylesheet" href="login.css">
     <title>Ritterspiele</title>
 </head>
 <body>
@@ -18,37 +18,28 @@
                 <li><a href="../Kontakt/kontakt.html">Kontakt</a></li>
             </ul>
         </div>
-        
-        <div class="navbar-right">
-            <button class="btn login-btn"><a href="../LoginAndSignUp/login.html">Login</a></button>
-            <button class="btn signup-btn"><a href="../LoginAndSignUp/signup.html">Sign Up</a></button>
-        </div>
     </nav>
-    
+
     <div class="card">
-        <h1>Ritterspiele</h1>
-        <p class="subtitle">Erstelle dein Konto</p>
-        
-        <div class="form-group">
-            <label>Benutzername</label>
-            <input type="text" id="username" placeholder="z.B. Ritter123"/>
-        </div>
- 
+        <h1>Login</h1>
+        <p class="subtitle">Melde dich an</p>
+
         <div class="form-group">
             <label>E-Mail</label>
-            <input type="email" id="email" placeholder="deine@email.com"/>
+            <input type="email" id="email" placeholder="deine@email.com">
         </div>
-    
+
         <div class="form-group">
             <label>Passwort</label>
-            <input type="password" id="password" placeholder="Mindestens 3 Zeichen"/>
+            <input type="password" id="password" placeholder="Passwort">
         </div>
- 
-        <button class="btn-register" id="registerBtn" onclick="register()">Registrieren</button>
- 
+
+        <button class="btn-login" id="loginBtn" onclick="login()">Einloggen</button>
+
         <div class="message" id="message"></div>
- 
-        <p class="login-link">Schon ein Konto? <a href="login.html">Einloggen</a></p>
+
+        <p class="signup-link">Noch kein Konto? <a href="signup.html">Registrieren</a></p>
+        <p> <a href="reset.html">Passwort vergessen?</a></p>
     </div>
 
     <!-- 1. Supabase CDN -->
@@ -57,7 +48,7 @@
     <!-- 2. script.js (Keys + db Client) -->
     <script src="../script.js"></script>
 
-    <!-- 3. signup Logik -->
-    <script src="signup.js"></script>
+    <!-- 3. login Logik -->
+    <script src="../LoginAndSignUp/login.js"></script>
 </body>
 </html>

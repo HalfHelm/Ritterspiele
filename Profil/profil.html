@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil</title>
+</head>
+<body>
+
+    <h1>Mein Profil</h1>
+
+    <p><b>Username:</b> <span id="username"></span></p>
+    <p><b>Email:</b> <span id="email"></span></p>
+
+    <div>
+        <h1>Ändere Username</h1>
+        <input type="email" id="emailInput" placeholder="Email">
+        <input type="password" id="passwordInput" placeholder="Passwort">
+        <input type="text" id="newUsername" placeholder="Neuer Username">
+
+<button id="changeUsernameBtn">Username ändern</button>
+    </div>
+
+    <button onclick="logout()">Logout</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../script.js"></script>
+    <script src="profile.js"></script>
+
+</body>
+</html>

@@ -4,57 +4,68 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 1.5;
 }
 
+/* ---- COLORS ---- */
 :root {
-  --black: #181818;
-  --light-black:#2e2e2e;
-  --white: #eeeeee;
-  --red: #bb0202;
-  --darkRed: #180000;
+    --black: #181818;
+    --light-black:#2e2e2e;
+    --white: #eeeeee;
+    --red: #bb0202;
+    --darkRed: #180000;
 }
 
-.section-container{
+.section-container {
     min-height: 100vh;
+    padding: 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 
-
-/*---- NAVBAR --*/
+/* ---- NAVBAR ---- */
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    flex-wrap: wrap;
     padding: 10px 20px;
-    background-color: var(--black); 
+    /* dunkler Ritter-Style */
+    background-color: var(--black);   
     color: var(--white);
 }
 
 .navbar-left {
     display: flex;
     align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
 .navbar-logo {
     width: 50px;
-    height: auto;
-    margin-right: 20px;
 }
 
 .navbar-menu {
     list-style: none;
     display: flex;
-    margin: 0;
-    padding: 0;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-.navbar-menu li {
+/*.navbar-menu li {
     margin-right: 20px;
 }
+*/
 
 .navbar-menu a {
     text-decoration: none;
@@ -63,145 +74,170 @@
 }
 
 .navbar-menu a:hover {
-    color: var(--red); 
+    /* goldener Ritter-Hauch */
+    color: var(--red);   
+}
+
+.navbar-right {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .navbar-right .btn {
     background-color: var(--black);
     color: var(--white);
     border: 1px solid var(--white);
-    padding: 5px 15px;
-    margin-left: 10px;
+    padding: 6px 15px;
     cursor: pointer;
     border-radius: 4px;
     font-weight: bold;
 }
 
 .navbar-right .btn:hover {
-    background-color: #2e2e2e;
+    background-color: var(--light-black);
+    /*background-color: #2e2e2e;
     border-color: var(--white);
     color: var(--white);
+    */
 }
 
 
-
-/*---- HERO ---*/
-.hero{
+/* ---- HERO ---- */
+.hero {
     background: var(--white);
     color: var(--black);
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
 }
 
-
-.hero-content-1{
-    display: flex;
+.hero-content-1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.hero h1{
-    font-size: 120px;
+.hero h1 {
+    font-size: clamp(40px, 10vw, 120px);
     font-family: 'Pirata One';
 }
 
-.hero img{
-    height: 250px;
+.hero img {
+    height: clamp(120px, 20vw, 250px);
 }
 
-.hero-btn-1{
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hero-btn-1, .hero-btn-2 {
     cursor: pointer;
     padding: 12px;
-    font-size: 28px;
-    width: 150px;
+    font-size: clamp(16px, 2vw, 24px);
+    width: 100%;
+    max-width: 200px;
     border-radius: 20px;
     border: none;
+}
+
+.hero-btn-1 {
     background: var(--red);
     color: var(--white);
-    margin-right: 10px;
 }
 
-.hero-btn-2{
-    cursor: pointer;
-    padding: 12px;
-    font-size: 28px;
-    width: 150px;
-    border-radius: 20px;
-    border: none;
+.hero-btn-2 {
     background: var(--black);
     color: var(--white);
-    margin-left: 10px;
 }
 
-
-.hero-btn-1:hover{
+.hero-btn-1:hover {
     background-color: #850202;
-    transition: all 0.2s;
 }
 
-.hero-btn-2:hover{
+.hero-btn-2:hover {
     background-color: #313131;
-    transition: all 0.2s;
 }
 
 
-/* ---- ABOUT ---*/
-.about{
+/* ---- ABOUT ---- */
+.about {
    background-color: var(--black);
    color: var(--white);
-   padding: 50px;
+   padding: clamp(20px, 5vw, 50px);
 }
 
-.about h1{
-    font-size: 60px;
+.about h1 {
+    font-size: clamp(32px, 6vw, 60px);
     font-family: 'Pirata One';
+    margin-bottom: 20px;
 }
 
-.about p{
-    font-size: 30px;
+.about p {
+    font-size: clamp(16px, 2.5vw, 26px);
 }
 
 .about-content {
     display: flex;
     align-items: center;   
     justify-content: space-between; 
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
+.about-text {
+    flex: 1;
+    min-width: 280px;
+}
 
+.about-image {
+    flex: 1;
+    text-align: center;
+}
 
 .about-image img {
-    width: 600px;   
-    height: auto;
+    width: 100%;   
+    max-width: 500px;
 }
 
-.about-p-2{
-    margin-top: 30px;
+.about-p-2 {
+    margin-top: 20px;
 }
 
-/* REGISTER*/
 
-
+/* ---- REGISTER ---- */
 .register-section {
     background-color: var(--darkRed); 
     color: var(--white);            
     text-align: center;
-    padding: 60px 20px;
+    padding: clamp(30px, 6vw, 60px) 20px;
 }
 
 .register-section h2 {
-    font-size: 40px;
+    font-size: clamp(24px, 5vw, 40px);
     margin-bottom: 20px;
     color: var(--red); 
 }
 
 .register-section p {
-    font-size: 20px;
+    font-size: clamp(16px, 2.5vw, 20px);
     margin-bottom: 30px;
     color: var(--white);
+}
+
+.register-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
 }
 
 .register-buttons .btn {
@@ -209,23 +245,15 @@
     color: var(--white);
     border: 1px solid var(--white);
     padding: 10px 25px;
-    margin: 0 10px;
     cursor: pointer;
     border-radius: 4px;
     font-weight: bold;
-  
+    width: 100%;
+    max-width: 250px;
 }
 
 .register-buttons .btn:hover {
-    background-color: var(--light-black);   
+    /*  Hover knallrot */
+    background-color: var(--light-black);    
     border-color: var(--white);
-   transition: all 0.2s;
 }
-
-
-
-
-
-
-
-

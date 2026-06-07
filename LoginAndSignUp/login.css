@@ -18,7 +18,7 @@ body {
     align-items: center;
     flex-direction: column;
     background-image: radial-gradient(ellipse at 20% 50%, #1a0000 0%, transparent 60%),
-                              radial-gradient(ellipse at 80% 20%, #1a0000 0%, transparent 50%);
+                      radial-gradient(ellipse at 80% 20%, #1a0000 0%, transparent 50%);
 }
  
 .card {
@@ -84,7 +84,7 @@ input::placeholder {
     color: #555;
 }
  
-.btn-register {
+.btn-login {
     width: 100%;
     background: var(--red);
     color: var(--white);
@@ -99,8 +99,8 @@ input::placeholder {
     transition: background 0.2s;
 }
  
-.btn-register:hover { background: #950101; }
-.btn-register:disabled { background: #555; cursor: not-allowed; }
+.btn-login:hover { background: #950101; }
+.btn-login:disabled { background: #555; cursor: not-allowed; }
  
 .message {
     margin-top: 18px;
@@ -125,16 +125,16 @@ input::placeholder {
     display: block;
 }
  
-.login-link {
+.signup-link {
     text-align: center;
     margin-top: 22px;
     color: #777;
     font-size: 15px;
 }
  
-.login-link a {
+.signup-link a {
     color: var(--red);
     text-decoration: none;
 }
  
-.login-link a:hover { text-decoration: underline; }
+.signup-link a:hover { text-decoration: underline; }
