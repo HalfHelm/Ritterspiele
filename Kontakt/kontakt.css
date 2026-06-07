@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=MedievalSharp&display=swap');
+
+:root {
+    --bg-black: #121212;
+    --card-black: #1a1a1a;
+    --white: #eeeeee;
+    --gold: #dfb15b;
+    --red: #9e0202;
+    --darkRed: #5a0000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-black);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.page-wrapper {
+    min-height: calc(100vh - 70px); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+.kontakt-card {
+    background: var(--card-black);
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.kontakt-card h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    font-family: 'MedievalSharp', cursive;
+    color: var(--gold);
+}
+
+
+.kontakt-emoji {
+    font-size: 70px;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite; 
+}
+
+.kontakt-card p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #ccc;
+}
+
+
+.mail-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 14px;
+    background: var(--red);
+    color: var(--white);
+    font-family: 'MedievalSharp', cursive;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 4px 12px rgba(158, 2, 2, 0.3);
+}
+
+.mail-btn:hover {
+    background: var(--darkRed);
+}
+
+.mail-btn:active {
+    transform: scale(0.98);
+}
+
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}

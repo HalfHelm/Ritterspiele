@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passwort reset</title>
+            <link rel="stylesheet" href="../Home/home-style.css">
+    <link rel="stylesheet" href="../Home/logout.css">
+    <link rel="stylesheet" href="reset.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <img src="../images/knight.png" alt="knight logo" class="navbar-logo">
+                <ul class="navbar-menu">
+                    <li><a href="../Home/home.html">Home</a></li>
+                    <li><a href="../Spiele/spiele.html">Spiele</a></li>
+                    <li><a href="../Impressum/impressum.html">Impressum</a></li>
+                    <li><a href="../Kontakt/kontakt.html">Kontakt</a></li>
+                    <li><a href="../Profil/profil.html">Profil</a></li>
+                </ul>
+            </div>
+
+            <div class="navbar-right" id="authButtons">
+                <a href="../LoginAndSignUp/login.html" class="btn login-btn">Login</a>
+                <a href="../LoginAndSignUp/signup.html" class="btn signup-btn">Sign Up</a>
+            </div>
+
+            <div class="navbar-right" id="logoutButton" style="display: none;">
+                <button class="btn logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-wrapper">
+        <div class="reset-card">
+            <h2>Passwort vergessen</h2>
+
+            <div class="form-group">
+                <input type="email" id="email" placeholder="Deine Email" required>
+                <input type="password" id="password" placeholder="Neues Passwort (min. 6 Zeichen)" required>
+            </div>
+
+            <button class="reset-btn" onclick="resetPassword()">Passwort zurücksetzen</button>
+
+            <p id="msg"></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../script.js"></script>
+
+    <script>
+    async function resetPassword() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if (!email || !password) {
+            document.getElementById("msg").innerText = "Alles ausfüllen!";
+            return;
+        }
+
+        if (password.length < 6) {
+            document.getElementById("msg").innerText = "Mindestens 6 Zeichen!";
+            return;
+        }
+
+        const { data, error } = await db
+            .from("users")
+            .update({ password: password })
+            .eq("email", email);
+
+        if (error) {
+            document.getElementById("msg").innerText = "Fehler: " + error.message;
+        } else {
+            document.getElementById("msg").innerText = "Passwort geändert!";
+        }
+    }
+    </script>
+
+</body>
+</html>

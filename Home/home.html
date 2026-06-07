@@ -4,79 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="home-style.css">
-        <link rel="icon" type="image/png" href="../images/knight.png">
+    <link rel="stylesheet" href="logout.css">
+    <link rel="icon" type="image/png" href="../images/knight.png">
     <title>Ritterspiele</title>
 </head>
 <body>
-<nav class="navbar">
-    <div class="navbar-left">
-        <img src="../images/knight.png" alt="knight logo" class="navbar-logo">
-        <ul class="navbar-menu">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Spiele</a></li>
-            <li><a href="/Ritterspiele/Impressum/impressum.html">Impressum</a></li>
-            <li><a href="#">Kontakt</a></li>
-        </ul>
-    </div>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <img src="../images/knight.png" alt="knight logo" class="navbar-logo">
+                <ul class="navbar-menu">
+                    <li><a href="../Home/home.html">Home</a></li>
+                    <li><a href="../Spiele/spiele.html">Spiele</a></li>
+                    <li><a href="../Impressum/impressum.html">Impressum</a></li>
+                    <li><a href="../Kontakt/kontakt.html">Kontakt</a></li>
+                    <li><a href="../Profil/profil.html">Profil</a></li>
+                </ul>
+            </div>
 
-    <div class="navbar-right">
-        <button class="btn login-btn">Login</button>
-        <button class="btn signup-btn"><a href="../LoginAndSignUp/signup.html">Sign Up</a></button>
-    </div>
-</nav>
+            <div class="navbar-right"  id="authButtons">
+                <a href="../LoginAndSignUp/login.html" class="btn login-btn">Login</a>
+                <a href="../LoginAndSignUp/signup.html" class="btn signup-btn">Sign Up</a>
+            </div>
 
-    <section class="section-container hero">
-        <div class="hero-content-1">
-            <h1>Ritterspiele</h1>
-            <img src="../images/knight.png" alt="knight">
-        </div>
+            <div class="navbar-right" id="logoutButton" style="display: none;">
+                <button class="btn logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+    </header>
 
-        <div class="hero-content-2">
+    <main>
+        <section class="section-container hero">
+            <div class="hero-content-1">
+                <h1>Ritterspiele</h1>
+                <img src="../images/knight.png" alt="knight">
+            </div>
+
+             <div class="hero-buttons">  
+               <a href="../Spiele/spiele.html" class="hero-btn-1">Spiele</a>
+                <a href="../Kontakt/kontakt.html" class="hero-btn-2">Kontakt</a>
+             </div>
+        </section>
+
+        <section class="section-container about">
+            <h1>Willkommen in der Welt der Ritterspiele!</h1>
             
-            <button class="hero-btn-1">Spiele</button>
-            <button class="hero-btn-2">Kontakt</button>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Stelle dich spannenden Herausforderungen<br/>
+                        und entdecke klassische Spiele.<br/>
+                        Registriere dich oder melde dich an, um deinen Fortschritt zu sichern und Ruhm zu erlangen.
+                    </p>
 
+                    <p class="about-p-2">
+                        Tauche ein in eine reichhaltige Welt voller Spiele und entdecke unzählige Möglichkeiten, deine Geschicklichkeit und Strategie zu testen.  
+                        Ob kurze Herausforderungen oder längere Abenteuer, hier ist für jeden Spielertyp etwas dabei.  
+                        Erlebe Spaß, Spannung und die Freude, deine Highscores immer weiter zu verbessern!
+                    </p>
+                </div>
+
+                <div class="about-image">
+                    <img src="../images/castle.png" alt="castle">
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <section class="register-section">
+        <div class="register-content">
+            <h2>LOS GEHT'S!</h2>
+            <p>Registriere dich oder logge dich ein, um deine Abenteuer zu starten.</p>
+
+            <div class="register-buttons">
+                               <a href="../LoginAndSignUp/login.html" >Login</a>
+                <a href="../LoginAndSignUp/signup.html" >Sign Up</a>
+            </div>
         </div>
     </section>
 
-
-
-<section class="section-container about">
-    <h1>Willkommen in der Welt der Ritterspiele!</h1>
-
-    <div class="about-content">
-        <div class="about-text">
-            <p>
-                Stelle dich spannenden Herausforderungen<br/>
-                und entdecke klassische Spiele.<br/>
-                Registriere dich oder melde dich an, um deinen Fortschritt zu sichern und Ruhm zu erlangen.
-            </p>
-
-            <p class="about-p-2">
-                Tauche ein in eine reichhaltige Welt voller Spiele und entdecke unzählige Möglichkeiten, deine Geschicklichkeit und Strategie zu testen.  
-                Ob kurze Herausforderungen oder längere Abenteuer, hier ist für jeden Spielertyp etwas dabei.  
-                Erlebe Spaß, Spannung und die Freude, deine Highscores immer weiter zu verbessern!
-            </p>
-        </div>
-
-        <div class="about-image">
-            <img src="../images/castle.png" alt="castle">
-        </div>
-    </div>
-</section>
-
-<section class="register-section">
-    <div class="register-content">
-        <h2>LOS GEHT'S!</h2>
-        <p>Registriere dich oder logge dich ein, um deine Abenteuer zu starten.</p>
-        <div class="register-buttons">
-            <button class="btn signup-btn">Sign Up</button>
-            <button class="btn login-btn">Login</button>
-        </div>
-    </div>
-</section>
-    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../script.js"></script>  
 </body>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../script.js"></script>
 </html>

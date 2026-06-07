@@ -1,0 +1,15 @@
+.logout-btn {
+    background: #444;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Pirata One', cursive;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.logout-btn:hover {
+    background: #bb0202;
+}

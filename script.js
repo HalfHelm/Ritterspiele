@@ -54,10 +54,25 @@ function anzeigenUsers(users) {
     document.body.appendChild(section);
 }
 
-// start wenn Seite geladen ist
-// Nur auf home.html ausführen
+function logout() {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "../LoginAndSignUp/login.html";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-    if (window.location.pathname.includes("home.html")) {
-        ladeUsers();
+    const user = localStorage.getItem("loggedInUser");
+
+    const authButtons = document.getElementById("authButtons");
+    const logoutButton = document.getElementById("logoutButton");
+
+    if (authButtons && logoutButton) {
+        if (user) {
+            authButtons.style.display = "none";
+            logoutButton.style.display = "flex";
+        } 
+        else {
+            authButtons.style.display = "flex";
+            logoutButton.style.display = "none";
+        }
     }
 });

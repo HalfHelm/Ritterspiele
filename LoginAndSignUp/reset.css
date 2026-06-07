@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=MedievalSharp&display=swap');
+
+:root {
+    --bg-black: #121212;
+    --card-black: #1a1a1a;
+    --input-black: #262626;
+    --text-white: #eeeeee;
+    --accent-gold: #dfb15b;
+    --action-red: #9e0202;
+    --action-red-hover: #5a0000;
+}
+
+/* Base Settings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-black);
+    color: var(--text-white);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Zentrierter Wrapper unter der Navbar */
+.page-wrapper {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Die Reset-Card */
+.reset-card {
+    background-color: var(--card-black);
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.reset-card h2 {
+    font-family: 'MedievalSharp', cursive;
+    color: var(--accent-gold);
+    font-size: 32px;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Eingabefelder-Gruppe */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: var(--input-black);
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: var(--text-white);
+    font-size: 16px;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+}
+
+/* Button */
+.reset-btn {
+    width: 100%;
+    padding: 14px;
+    font-family: 'MedievalSharp', cursive;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: var(--action-red);
+    color: var(--text-white);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 4px 12px rgba(158, 2, 2, 0.3);
+}
+
+.reset-btn:hover {
+    background-color: var(--action-red-hover);
+}
+
+.reset-btn:active {
+    transform: scale(0.98);
+}
+
+/* Status- / Fehlermeldung unter dem Button */
+#msg {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--accent-gold);
+    min-height: 24px; /* Verhindert das Springen der Box bei Textanzeige */
+}

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="signup.css">
-        <link rel="stylesheet" href="../Home/home-style.css">
+    <title>Profil</title>
+    <link rel="stylesheet" href="../Home/home-style.css">
     <link rel="stylesheet" href="../Home/logout.css">
-    <title>Ritterspiele</title>
+    <link rel="stylesheet" href="profil.css">
 </head>
 <body>
- <header>
+
+    <header>
         <nav class="navbar">
             <div class="navbar-left">
                 <img src="../images/knight.png" alt="knight logo" class="navbar-logo">
@@ -32,42 +33,38 @@
             </div>
         </nav>
     </header>
-    
-    <div class="container">
-    <div class="card">
-        <h1>Ritterspiele</h1>
-        <p class="subtitle">Erstelle dein Konto</p>
+
+    <div class="profile-wrapper">
         
-        <div class="form-group">
-            <label>Benutzername</label>
-            <input type="text" id="username" placeholder="z.B. Ritter123"/>
+        <h1>Mein Profil</h1>
+
+        <div class="profile-card">
+            <h2>Ritter-Daten</h2>
+            <div class="info-group">
+                <b>Username:</b> <span id="username">Lade...</span>
+            </div>
+            <div class="info-group">
+                <b>Email:</b> <span id="email">Lade...</span>
+            </div>
         </div>
- 
-        <div class="form-group">
-            <label>E-Mail</label>
-            <input type="email" id="email" placeholder="deine@email.com"/>
+
+        <div class="profile-card">
+            <h2>Eigenschaften ändern</h2>
+            <div class="form-group">
+                <input type="email" id="emailInput" placeholder="Aktuelle Email">
+                <input type="password" id="passwordInput" placeholder="Aktuelles Passwort">
+                <input type="text" id="newUsername" placeholder="Neuer Wunsch-Username">
+                <button id="changeUsernameBtn">Username ändern</button>
+            </div>
         </div>
-    
-        <div class="form-group">
-            <label>Passwort</label>
-            <input type="password" id="password" placeholder="Mindestens 3 Zeichen"/>
-        </div>
- 
-        <button class="btn-register" id="registerBtn" onclick="register()">Registrieren</button>
- 
-        <div class="message" id="message"></div>
- 
-        <p class="login-link">Schon ein Konto? <a href="login.html">Einloggen</a></p>
-    </div>
+
+        <button class="danger-btn" onclick="logout()">Aus dem Lager ausloggen</button>
+        
     </div>
 
-    <!-- 1. Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- 2. script.js (Keys + db Client) -->
     <script src="../script.js"></script>
+    <script src="profile.js"></script>
 
-    <!-- 3. signup Logik -->
-    <script src="signup.js"></script>
 </body>
 </html>

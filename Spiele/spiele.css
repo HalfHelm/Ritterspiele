@@ -1,0 +1,205 @@
+/* ==========================================================================
+   1. FONTS & ROOT PROPERTIES (Farben & Variablen)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=MedievalSharp&display=swap');
+
+:root {
+    --black: #121212;         
+    --light-black: #1a1a1a;    
+    --lighter-black: #262626;  
+    --white: #eeeeee;         
+    --gold: #dfb15b;         
+    --red: #9e0202;            
+    --darkRed: #5a0000;        
+    --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+body {
+    background: var(--black);
+    color: var(--white);
+    /* padding: 30px 15px; */
+    /* max-width: 1200px; */
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   2. HEADINGS & NAVIGATION
+   ========================================================================== */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    font-size: 45px;
+    font-family: 'MedievalSharp', cursive;
+    color: var(--gold);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+button:hover{
+cursor:pointer;
+    
+}
+
+
+/* ==========================================================================
+   3. CONTROLS (Suche & Filter-Buttons)
+   ========================================================================== */
+#searchBar {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 18px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: var(--light-black);
+    color: var(--white);
+    font-size: 16px;
+    transition: border-color 0.2s;
+}
+
+#searchBar:focus {
+    outline: none;
+    border-color: var(--gold);
+}
+
+body > button {
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 10px 20px;
+    font-family: 'MedievalSharp', cursive;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    background: var(--lighter-black);
+    color: var(--white);
+    border: 1px solid #444;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+body > button:hover {
+    background: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+}
+
+
+#sortLikes {
+    border-color: var(--red);
+}
+#sortLikes:hover {
+    background: var(--red);
+    color: var(--white);
+    border-color: var(--red);
+}
+
+
+body {
+    text-align: center;
+}
+
+/* ==========================================================================
+   4. GAMES GRID & CARDS
+   ========================================================================== */
+.games-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 30px 0;
+    max-width:1200px;
+    margin: 0 auto;
+    text-align: left;
+   
+}
+
+.game-card {
+    background: var(--light-black);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid #222;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+}
+
+.game-card h2 {
+    font-family: 'MedievalSharp', cursive;
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 12px;
+}
+
+.game-card p {
+    font-size: 14px;
+    color: #cccccc;
+    margin-bottom: 20px;
+    flex-grow: 1; 
+}
+
+/* Card Footer Layout */
+.game-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid var(--lighter-black);
+}
+
+/* Like Button im Card Footer */
+.game-footer .like-btn {
+    background: var(--lighter-black);
+    border: 1px solid #444;
+    padding: 6px 12px;
+    margin: 0;
+    font-size: 14px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--white);
+}
+
+.game-footer .like-btn:hover:not(:disabled) {
+    background: var(--red);
+    border-color: var(--red);
+}
+
+.game-footer .like-btn span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+.game-footer a {
+    font-family: 'MedievalSharp', cursive;
+    text-decoration: none;
+    color: var(--gold);
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px 14px;
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.game-footer a:hover {
+    background: var(--gold);
+    color: var(--black);
+}

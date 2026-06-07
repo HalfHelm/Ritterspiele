@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="signup.css">
+    <title>Kontakt</title>
         <link rel="stylesheet" href="../Home/home-style.css">
     <link rel="stylesheet" href="../Home/logout.css">
-    <title>Ritterspiele</title>
+    <link rel="stylesheet" href="kontakt.css">
 </head>
 <body>
- <header>
+    <header>
         <nav class="navbar">
             <div class="navbar-left">
                 <img src="../images/knight.png" alt="knight logo" class="navbar-logo">
@@ -33,41 +33,21 @@
         </nav>
     </header>
     
-    <div class="container">
-    <div class="card">
-        <h1>Ritterspiele</h1>
-        <p class="subtitle">Erstelle dein Konto</p>
-        
-        <div class="form-group">
-            <label>Benutzername</label>
-            <input type="text" id="username" placeholder="z.B. Ritter123"/>
+    <div class="page-wrapper">
+        <div class="kontakt-card">
+            <h1>Kontakt</h1>
+            
+            <div class="kontakt-emoji">✉️</div>
+            
+            <p>Hast du Fragen, Feedback oder Probleme?<br>Schreib uns eine Nachricht per Brieftaube!</p>
+
+            <a href="mailto:test@mail.com?subject=Frage%20zu%20den%20Ritterspielen" class="mail-btn">
+                E-Mail senden
+            </a>
         </div>
- 
-        <div class="form-group">
-            <label>E-Mail</label>
-            <input type="email" id="email" placeholder="deine@email.com"/>
-        </div>
-    
-        <div class="form-group">
-            <label>Passwort</label>
-            <input type="password" id="password" placeholder="Mindestens 3 Zeichen"/>
-        </div>
- 
-        <button class="btn-register" id="registerBtn" onclick="register()">Registrieren</button>
- 
-        <div class="message" id="message"></div>
- 
-        <p class="login-link">Schon ein Konto? <a href="login.html">Einloggen</a></p>
-    </div>
     </div>
 
-    <!-- 1. Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- 2. script.js (Keys + db Client) -->
-    <script src="../script.js"></script>
-
-    <!-- 3. signup Logik -->
-    <script src="signup.js"></script>
+    <script src="../script.js"></script>  
 </body>
 </html>

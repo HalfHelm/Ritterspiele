@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impressum</title>
+    <title>Spiele Liste</title>
     <link rel="stylesheet" href="../Home/home-style.css">
     <link rel="stylesheet" href="../Home/logout.css">
-    <link rel="stylesheet" href="impressum.css">
+    <link rel="stylesheet" href="spiele.css">
+
+    <!-- WICHTIG: Das Supabase CDN einbinden -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-
+    
     <header>
         <nav class="navbar">
             <div class="navbar-left">
@@ -33,25 +36,21 @@
             </div>
         </nav>
     </header>
-    
-    <div class="page-wrapper">
-        <div class="impressum-card">
-            
-            <h1>Impressum</h1>
-            <p class="subtitle">Die Erschaffer dieser Allianz</p>
-            
-            <ul class="team-list">
-                <li>Beyza Tekin</li>
-                <li>Hemma Ruhdorfer</li>
-                <li>Larissa Nagiler</li>
-                <li>Roxana Kühlmann</li>
-                <li>Ensar Mehmedovic</li>
-            </ul>
 
-        </div>
-    </div>
+    <h1>🎮 Spiele Liste</h1>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <input type="text" id="searchBar" placeholder="Spiel suchen...">
+    <button id="sortAZ">A → Z</button>
+    <button id="sortZA">Z → A</button>
+    <!-- 🌟 HIER IST DER NEUE BUTTON FÜR DIE LIKES -->
+    <button id="sortLikes">🔥 Beliebteste (Likes)</button>
+
+    <div class="games-container" id="gamesContainer"></div>
+
+  
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+              <script src="spiele.js"></script>
     <script src="../script.js"></script>  
+
 </body>
 </html>
