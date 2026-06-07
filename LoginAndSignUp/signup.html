@@ -4,27 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="signup.css">
-    <link rel="stylesheet" href="home-style.css">
+        <link rel="stylesheet" href="../Home/home-style.css">
+    <link rel="stylesheet" href="../Home/logout.css">
     <title>Ritterspiele</title>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-left">
-            <img src="../images/knight.png" alt="knight logo" class="navbar-logo">
-            <ul class="navbar-menu">
-                <li><a href="../Home/home.html">Home</a></li>
-                <li><a href="#">Spiele</a></li>
-                <li><a href="../Impressum/impressum.html">Impressum</a></li>
-                <li><a href="../Kontakt/kontakt.html">Kontakt</a></li>
-            </ul>
-        </div>
-        
-        <div class="navbar-right">
-            <button class="btn login-btn"><a href="../LoginAndSignUp/login.html">Login</a></button>
-            <button class="btn signup-btn"><a href="../LoginAndSignUp/signup.html">Sign Up</a></button>
-        </div>
-    </nav>
+ <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <img src="../images/knight.png" alt="knight logo" class="navbar-logo">
+                <ul class="navbar-menu">
+                    <li><a href="../Home/home.html">Home</a></li>
+                    <li><a href="../Spiele/spiele.html">Spiele</a></li>
+                    <li><a href="../Impressum/impressum.html">Impressum</a></li>
+                    <li><a href="../Kontakt/kontakt.html">Kontakt</a></li>
+                    <li><a href="../Profil/profil.html">Profil</a></li>
+                </ul>
+            </div>
+
+            <div class="navbar-right" id="authButtons">
+                <a href="../LoginAndSignUp/login.html" class="btn login-btn">Login</a>
+                <a href="../LoginAndSignUp/signup.html" class="btn signup-btn">Sign Up</a>
+            </div>
+
+            <div class="navbar-right" id="logoutButton" style="display: none;">
+                <button class="btn logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+    </header>
     
+    <div class="container">
     <div class="card">
         <h1>Ritterspiele</h1>
         <p class="subtitle">Erstelle dein Konto</p>
@@ -49,6 +58,7 @@
         <div class="message" id="message"></div>
  
         <p class="login-link">Schon ein Konto? <a href="login.html">Einloggen</a></p>
+    </div>
     </div>
 
     <!-- 1. Supabase CDN -->

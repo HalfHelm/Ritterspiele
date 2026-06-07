@@ -13,13 +13,17 @@ body {
     background-color: var(--black);
     color: var(--white);
     font-family: 'Crimson Text', Georgia, serif;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+
     background-image: radial-gradient(ellipse at 20% 50%, #1a0000 0%, transparent 60%),
                       radial-gradient(ellipse at 80% 20%, #1a0000 0%, transparent 50%);
 }
+
+.container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
  
 .card {
     margin-top: 40px;
@@ -138,3 +142,19 @@ input::placeholder {
 }
  
 .signup-link a:hover { text-decoration: underline; }
+
+.reset-link {
+    text-align: center;
+    margin-top: 12px; 
+    font-size: 15px;
+}
+
+.reset-link a {
+    color: #aaa; 
+    text-decoration: none;
+}
+
+.reset-link a:hover {
+    text-decoration: underline;
+    color: var(--white);
+}

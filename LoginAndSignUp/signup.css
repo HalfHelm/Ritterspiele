@@ -14,13 +14,17 @@ body {
     color: var(--white);
     font-family: 'Crimson Text', Georgia, serif;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     background-image: radial-gradient(ellipse at 20% 50%, #1a0000 0%, transparent 60%),
                               radial-gradient(ellipse at 80% 20%, #1a0000 0%, transparent 50%);
 }
  
+
+.container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
 .card {
     margin-top: 40px;
     background: #141414;

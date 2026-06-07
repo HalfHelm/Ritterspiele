@@ -1,87 +1,93 @@
 @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=MedievalSharp&display=swap');
 
-*{
+:root {
+    --bg-black: #121212;
+    --card-black: #1a1a1a;
+    --white: #eeeeee;
+    --gold: #dfb15b;
+    --red: #9e0202;
+    --darkRed: #5a0000;
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
 }
 
 body {
-    background: var(--black);
+    background: var(--bg-black);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-:root {
-  --black: #181818;
-  --light-black:#2e2e2e;
-  --white: #eeeeee;
-  --red: #bb0202;
-  --darkRed: #180000;
-}
-
-.kontakt-container {
-    height: 100vh;
+.page-wrapper {
+    min-height: calc(100vh - 70px); 
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 80px;
-    color: var(--white);
+    padding: 20px;
 }
 
-.kontakt-container h1 {
-    font-size: 40px;
-    margin-bottom: 20px;
-    font-family: 'MedievalSharp', cursive;
-}
 
-.kontakt-container p {
-    font-size: 20px;
-    margin-bottom: 20px;
+.kontakt-card {
+    background: var(--card-black);
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 450px;
     text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
-/* Formular */
-.kontakt-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 350px;
+.kontakt-card h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    font-family: 'MedievalSharp', cursive;
+    color: var(--gold);
 }
 
-.kontakt-form label {
-    font-size: 20px;
+
+.kontakt-emoji {
+    font-size: 70px;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite; 
 }
 
-.kontakt-form input,
-.kontakt-form textarea {
-    padding: 12px;
-    border-radius: 5px;
-    border: none;
-    background: var(--light-black);
-    color: var(--white);
+.kontakt-card p {
     font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #ccc;
 }
 
-.kontakt-form textarea {
-    height: 120px;
-    resize: none;
-}
 
-/* Button */
-.submit-btn {
-    padding: 12px;
+.mail-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 14px;
     background: var(--red);
-    border: none;
-    border-radius: 5px;
     color: var(--white);
+    font-family: 'MedievalSharp', cursive;
     font-size: 20px;
-    cursor: pointer;
-    transition: 0.2s;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 4px 12px rgba(158, 2, 2, 0.3);
 }
 
-.submit-btn:hover {
+.mail-btn:hover {
     background: var(--darkRed);
+}
+
+.mail-btn:active {
+    transform: scale(0.98);
+}
+
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }

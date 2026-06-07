@@ -67,8 +67,11 @@ img {
 }
 */
 
-.navbar-menu a {
-    text-decoration: none;
+
+.navbar a,
+.navbar-menu li a,
+.navbar-right a {
+    text-decoration: none ; 
     color: var(--white);
     font-weight: bold;
 }
@@ -147,6 +150,10 @@ img {
     max-width: 200px;
     border-radius: 20px;
     border: none;
+
+    text-decoration: none;  
+    display: inline-block;   
+    text-align: center;
 }
 
 .hero-btn-1 {
@@ -240,7 +247,7 @@ img {
     gap: 15px;
 }
 
-.register-buttons .btn {
+.register-buttons a{
     background-color: var(--black);   
     color: var(--white);
     border: 1px solid var(--white);
@@ -250,9 +257,10 @@ img {
     font-weight: bold;
     width: 100%;
     max-width: 250px;
+    text-decoration:none;
 }
 
-.register-buttons .btn:hover {
+.register-buttons a:hover {
     /*  Hover knallrot */
     background-color: var(--light-black);    
     border-color: var(--white);

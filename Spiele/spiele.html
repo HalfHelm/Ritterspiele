@@ -4,21 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spiele Liste</title>
+    <link rel="stylesheet" href="../Home/home-style.css">
+    <link rel="stylesheet" href="../Home/logout.css">
     <link rel="stylesheet" href="spiele.css">
-    
+
     <!-- WICHTIG: Das Supabase CDN einbinden -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+    
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <img src="../images/knight.png" alt="knight logo" class="navbar-logo">
+                <ul class="navbar-menu">
+                    <li><a href="../Home/home.html">Home</a></li>
+                    <li><a href="../Spiele/spiele.html">Spiele</a></li>
+                    <li><a href="../Impressum/impressum.html">Impressum</a></li>
+                    <li><a href="../Kontakt/kontakt.html">Kontakt</a></li>
+                    <li><a href="../Profil/profil.html">Profil</a></li>
+                </ul>
+            </div>
 
-    <h1>Spiele Liste</h1>
+            <div class="navbar-right" id="authButtons">
+                <a href="../LoginAndSignUp/login.html" class="btn login-btn">Login</a>
+                <a href="../LoginAndSignUp/signup.html" class="btn signup-btn">Sign Up</a>
+            </div>
 
-    <ul class="navbar-menu">
-        <li><a href="../Home/home.html">Home</a></li>
-        <li><a href="../Spiele/spiele.html">Spiele</a></li>
-        <li><a href="../Impressum/impressum.html">Impressum</a></li>
-        <li><a href="../Kontakt/kontakt.html">Kontakt</a></li>
-    </ul>
+            <div class="navbar-right" id="logoutButton" style="display: none;">
+                <button class="btn logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <h1>🎮 Spiele Liste</h1>
 
     <input type="text" id="searchBar" placeholder="Spiel suchen...">
     <button id="sortAZ">A → Z</button>
@@ -28,6 +47,10 @@
 
     <div class="games-container" id="gamesContainer"></div>
 
-    <script src="spiele.js"></script>
+  
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+              <script src="spiele.js"></script>
+    <script src="../script.js"></script>  
+
 </body>
 </html>

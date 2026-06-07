@@ -2,25 +2,65 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
+    <link rel="stylesheet" href="../Home/home-style.css">
+    <link rel="stylesheet" href="../Home/logout.css">
+    <link rel="stylesheet" href="profil.css">
 </head>
 <body>
 
-    <h1>Mein Profil</h1>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <img src="../images/knight.png" alt="knight logo" class="navbar-logo">
+                <ul class="navbar-menu">
+                    <li><a href="../Home/home.html">Home</a></li>
+                    <li><a href="../Spiele/spiele.html">Spiele</a></li>
+                    <li><a href="../Impressum/impressum.html">Impressum</a></li>
+                    <li><a href="../Kontakt/kontakt.html">Kontakt</a></li>
+                    <li><a href="../Profil/profil.html">Profil</a></li>
+                </ul>
+            </div>
 
-    <p><b>Username:</b> <span id="username"></span></p>
-    <p><b>Email:</b> <span id="email"></span></p>
+            <div class="navbar-right" id="authButtons">
+                <a href="../LoginAndSignUp/login.html" class="btn login-btn">Login</a>
+                <a href="../LoginAndSignUp/signup.html" class="btn signup-btn">Sign Up</a>
+            </div>
 
-    <div>
-        <h1>Ändere Username</h1>
-        <input type="email" id="emailInput" placeholder="Email">
-        <input type="password" id="passwordInput" placeholder="Passwort">
-        <input type="text" id="newUsername" placeholder="Neuer Username">
+            <div class="navbar-right" id="logoutButton" style="display: none;">
+                <button class="btn logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+    </header>
 
-<button id="changeUsernameBtn">Username ändern</button>
+    <div class="profile-wrapper">
+        
+        <h1>Mein Profil</h1>
+
+        <div class="profile-card">
+            <h2>Ritter-Daten</h2>
+            <div class="info-group">
+                <b>Username:</b> <span id="username">Lade...</span>
+            </div>
+            <div class="info-group">
+                <b>Email:</b> <span id="email">Lade...</span>
+            </div>
+        </div>
+
+        <div class="profile-card">
+            <h2>Eigenschaften ändern</h2>
+            <div class="form-group">
+                <input type="email" id="emailInput" placeholder="Aktuelle Email">
+                <input type="password" id="passwordInput" placeholder="Aktuelles Passwort">
+                <input type="text" id="newUsername" placeholder="Neuer Wunsch-Username">
+                <button id="changeUsernameBtn">Username ändern</button>
+            </div>
+        </div>
+
+        <button class="danger-btn" onclick="logout()">Aus dem Lager ausloggen</button>
+        
     </div>
-
-    <button onclick="logout()">Logout</button>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../script.js"></script>
