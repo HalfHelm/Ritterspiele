@@ -2,8 +2,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const user = localStorage.getItem("loggedInUser");
 
-    if (!user) {
-        // 🛠️ TEAM-FALLBACK: Wenn der LocalStorage auf den PCs deiner Kollegen leer ist,
+   /* if (!user) {
+        // TEAM-FALLBACK: Wenn der LocalStorage auf den PCs deiner Kollegen leer ist,
         // erstellen wir automatisch temporäre Testdaten, damit sie nicht rausfliegen!
         console.log("Kein User im LocalStorage gefunden. Erstelle ritterliche Testdaten...");
         
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("username").textContent = testUser.username;
         document.getElementById("email").textContent = testUser.email;
         return;
-    }
+    }*/
 
   
     const parsedUser = JSON.parse(user);
